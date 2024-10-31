@@ -1,0 +1,1099 @@
+SELECT    * 
+FROM      information_schema.TABLES 
+where     table_schema ='feas' 
+ORDER BY  TABLES.CREATE_TIME DESC
+
+
+1- create table tCmp_Country(cCnt_ID	varchar(3),
+                          cCnt_Desc	varchar(50),
+PRIMARY KEY(cCnt_ID)
+)
+
+2- create table tCmp_Province(cProv_ID	varchar(3),
+                           cProv_Desc	varchar(50),
+                           cCnt_ID	varchar(3),
+
+PRIMARY KEY(cProv_ID), 
+FOREIGN KEY(cCnt_ID) REFERENCES tCmp_Loc(cLoc_ID)
+)
+
+3- create table tCmp_City(cCity_ID	        varchar(3),
+                       cCity_Desc	varchar(50)
+                       cProv_ID	varchar(3),
+PRIMARY KEY(cProv_ID), 
+FOREIGN KEY(cCnt_ID) REFERENCES tCmp_Loc(cLoc_ID)
+)
+
+4- CREATE TABLE IF NOT EXISTS tCmp_Loc (
+  cLoc_ID    VARCHAR(4),
+  cLoc_Name    VARCHAR(50),
+  cLoc_Add1    VARCHAR(50),
+  cLoc_Add2    VARCHAR(50),
+  cLoc_City    VARCHAR(50),
+  cLoc_zip     VARCHAR(10),
+  cLoc_Porv    VARCHAR(50),
+  cLoc_Country VARCHAR(50),
+  cLoc_Phone VARCHAR(10),
+  cLoc_Email VARCHAR(50),
+
+  PRIMARY KEY (cLoc_ID)
+);  
+
+5- create table tCmp_Floor (cFloor_ID	varchar(2),
+                         cFloor_Desc	varchar(30),
+                         cLoc_ID	varchar(4),
+                         cFloor_Sides	varchar(2),
+                         cFloor_Manager	varchar(4),
+                         cFloor_PA	varchar(4),
+PRIMARY KEY(cFloor_ID), 
+FOREIGN KEY(cLoc_ID) REFERENCES tCmp_Loc(cLoc_ID)
+)
+
+6- create table tCmp_Dept(cDept_ID	        varchar(4),
+                       cDept_Desc	varchar(50),
+                       cDept_Head	varchar(4),
+                       cFloor_ID	varchar(4),
+PRIMARY KEY(cDept_ID), 
+FOREIGN KEY(cFloor_ID) REFERENCES tCmp_Floor(cFloor_ID)
+
+)
+
+7- create table tCmp_Stations(cStn_ID	varchar(4),
+                           cStn_Desc	varchar(50),
+                           cFloor_ID	varchar(2),
+                           cFlrSide_ID  varchar(2),
+                           cStn_Status  varchar(1),
+                           cEmp_ID      varchar(4),
+PRIMARY KEY(cStn_ID), 
+FOREIGN KEY(cFloor_ID)   REFERENCES tCmp_Floor(cFloor_ID)
+)
+
+8- create table tCmp_FlrSide(
+	cFlrSide_ID    varchar(2),
+        cFlrSide_Desc  varchar(50),
+        cFloor_ID      varchar(2),
+PRIMARY KEY(cFlrSide_ID),
+FOREIGN KEY (cFloor_ID) REFERENCES tCmp_Floor(cFloor_ID)
+)
+
+9- create table tCmp_SmokeData (cSmoke      varchar(2), 
+                             cFloor_ID   varchar(2), 
+                             cFlrSide_ID varchar(2)
+)
+10- create table tCmp_HeatData (cHeat     varchar(2), 
+                            cFloor_ID varchar(2), 
+                            cFlrSide_ID varchar(2)
+)
+11- create table tCmp_FireData (cFire varchar(2), 
+                            cFloor_ID varchar(2), 
+                            cFlrSide_ID varchar(2),
+
+)
+
+12- create table tEmp_Type (cEmp_Type varchar(2), 
+                            cType_Desc varchar(30) 
+PRIMARY KEY(cEmp_Type)
+
+)
+
+12- create table tEmp_Level (cEmp_Level varchar(2), 
+                            cLevel_Desc varchar(30) 
+PRIMARY KEY(cEmp_level)
+
+13- create table tEmp_Main(cEmp_ID          varchar(4),
+                      cEmp_Login	    varchar(8),		
+                      cEmp_FName	    varchar(30),	
+                      cEmp_LName	    varchar(30),
+                      cEmp_MName	    varchar(30),
+                      cEmp_JoinDate	    date,
+                      cEmp_Manager	    varchar(4),
+                      cEmp_Type		    varchar(4),
+                      cEmp_Level	    varchar(4),
+                      cLoc_ID		    varchar(4),
+                      cEmp_ContactNo	    varchar(10),
+                      cEmpContactEmail	    varchar(45),
+                      cEmp_Emergency1	    varchar(10),
+                      cEmp_Emergency2	    varchar(10),
+                      cDept_ID		    varchar(4),
+PRIMARY KEY (cEmp_ID),
+FOREIGN KEY (cEmp_Type)  REFERENCES tEmp_Type(cEmp_Type),
+FOREIGN KEY (cEmp_Level) REFERENCES tEmp_Level(cEmp_Level)
+)
+
+
+14-create table tCmp_FlrMsgs(
+	cFlrMsg_ID    varchar(2),
+	cFlrMsg_Desc  varchar(50),
+PRIMARY KEY(cFlrMsg_ID)
+)
+
+                     )
+
+15- create table tcmp_msgdb (cFlrMSg_ID varchar(02), cMsg_ID varchar(08), cMsg varchar(200))
+
+
+16- create table tCmp_SysAdmin(cSysAdmin_ID	varchar(4),
+                           cSysAdmin_PW	varchar(10))
+
+
+======================
+Data
+======================
+
+Province
+==========
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Alberta','AB','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('British Columbia','BC','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Manitoba','MB','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('New Brunswick','NB','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Newfoundland and Labrador','NL','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Northwest Territories','NT','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Nova Scotia','NS','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Nunavut','NU','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Ontario','ON','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Prince Edward Island','PE','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Quebec','QC','001');
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Saskatchewan','SK','001);
+INSERT INTO tCmp_Province(cProv_Desc,cProv_ID,cCnt_ID) 
+VALUES ('Yukon','YT','001');
+
+
+======================
+Cities
+======================
+Alberta, AB
+-----------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Banff','AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Brooks','AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Calgary', 'AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Edmonton', 'AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Fort McMurray', 'AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Grande Prairie', 'AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Jasper', 'AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Lake Louise', 'AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Lethbridge', 'AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Medicine Hat', 'AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Red Deer', 'AB');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Saint Albert','AB');
+
+British Columbia
+----------------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Barkerville','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Burnaby','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Campbell River','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Chilliwack','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Courtenay','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Cranbrook','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Dawson Creek','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Delta','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Esquimalt','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Fort Saint James','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Fort Saint John','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Hope','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Kamloops','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Kelowna','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Kimberley','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Kitimat','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Langley','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Nanaimo','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Nelson','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('New Westminster','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('North Vancouver','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Oak Bay','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Penticton','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Powell River','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Prince George','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Prince Rupert','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Quesnel','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Revelstoke','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Rossland','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Trail','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Vancouver','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Vernon','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Victoria','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('West Vancouver','BC');
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('White Rock','BC');
+
+Manitoba
+--------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Brandon','MB'),
+('Churchill','MB'),
+('Dauphin','MB'),
+('Flin Flon','MB'),
+('Kildonan','MB'),
+('Saint Boniface','MB'),
+('Swan River','MB'),
+('Thompson','MB'),
+('Winnipeg','MB'),
+('York Factory','MB');
+
+New Brunswick
+-------------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Bathurst','NB'),
+('Caraquet','NB'),
+('Dalhousie','NB'),
+('Fredericton','NB'),
+('Miramichi','NB'),
+('Moncton','NB'),
+('Saint John','NB');
+
+Newfoundland and Labrador
+------------------------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Argentia','NL'),
+('Bonavista','NL'),
+('Channel-Port aux Basques','NL'),
+('Corner Brook','NL'),
+('Ferryland','NL'),
+('Gander','NL'),
+('Grand Falls–Windsor','NL'),
+('Happy Valley–Goose Bay','NL'),
+('Harbour Grace','NL'),
+('Labrador City','NL'),
+('Placentia','NL'),
+('Saint Anthony','NL'),
+('St. John’s','NL'),
+('Wabana','NL');
+
+Northwest Territories
+---------------------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Fort Smith','NT'),
+('Hay River','NT'),
+('Inuvik','NT'),
+('Tuktoyaktuk','NT'),
+('Yellowknife','NT');
+
+Nova Scotia
+-----------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Baddeck','NS'),
+('Digby','NS'),
+('Glace Bay','NS'),
+('Halifax','NS'),
+('Liverpool','NS'),
+('Louisbourg','NS'),
+('Lunenburg','NS'),
+('Pictou','NS'),
+('Port Hawkesbury','NS'),
+('Springhill','NS'),
+('Sydney','NS'),
+('Yarmouth','NS');
+
+Nunavut
+-------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Iqaluit','NU');
+
+Ontario
+------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Bancroft','ON'),
+('Barrie','ON'),
+('Belleville','ON'),
+('Brampton','ON'),
+('Brantford','ON'),
+('Brockville','ON'),
+('Burlington','ON'),
+('Cambridge','ON'),
+('Chatham','ON'),
+('Chatham-Kent','ON'),
+('Cornwall','ON'),
+('Elliot Lake','ON'),
+('Etobicoke','ON'),
+('Fort Erie','ON'),
+('Fort Frances','ON'),
+('Gananoque','ON'),
+('Guelph','ON'),
+('Hamilton','ON'),
+('Iroquois Falls','ON'),
+('Kapuskasing','ON'),
+('Kawartha Lakes','ON'),
+('Kenora','ON'),
+('Kingston','ON'),
+('Kirkland Lake','ON'),
+('Kitchener','ON'),
+('Laurentian Hills','ON'),
+('London','ON'),
+('Midland','ON'),
+('Mississauga','ON'),
+('Moose Factory','ON'),
+('Moosonee','ON'),
+('Niagara Falls','ON'),
+('Niagara-on-the-Lake','ON'),
+('North Bay','ON'),
+('North York','ON'),
+('Oakville','ON'),
+('Orillia','ON'),
+('Oshawa','ON'),
+('Ottawa','ON'),
+('Parry Sound','ON'),
+('Perth','ON'),
+('Peterborough','ON'),
+('Picton','ON'),
+('Port Colborne','ON'),
+('Saint Catharines','ON'),
+('Saint Thomas','ON'),
+('Sarnia-Clearwater','ON'),
+('Sault Sainte Marie','ON'),
+('Scarborough','ON'),
+('Simcoe','ON'),
+('Stratford','ON'),
+('Sudbury','ON'),
+('Temiskaming Shores','ON'),
+('Thorold','ON'),
+('Thunder Bay','ON'),
+('Timmins','ON'),
+('Toronto','ON'),
+('Trenton','ON'),
+('Waterloo','ON'),
+('Welland','ON'),
+('West Nipissing','ON'),
+('Windsor','ON'),
+('Woodstock','ON'),
+('York','ON');
+
+Prince Edward Island
+--------------------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Borden','PE'),
+('Cavendish','PE'),
+('Charlottetown','PE'),
+('Souris','PE'),
+('Summerside','PE');
+
+Quebec
+------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Asbestos','QC'),
+('Baie-Comeau','QC'),
+('Beloeil','QC'),
+('Cap-de-la-Madeleine','QC'),
+('Chambly','QC'),
+('Charlesbourg','QC'),
+('Châteauguay','QC'),
+('Chibougamau','QC'),
+('Côte-Saint-Luc','QC'),
+('Dorval','QC'),
+('Gaspé','QC'),
+('Gatineau','QC'),
+('Granby','QC'),
+('Havre-Saint-Pierre','QC'),
+('Hull','QC'),
+('Jonquière','QC'),
+('Kuujjuaq','QC'),
+('La Salle','QC'),
+('La Tuque','QC'),
+('Lachine','QC'),
+('Laval','QC'),
+('Lévis','QC'),
+('Longueuil','QC'),
+('Magog','QC'),
+('Matane','QC'),
+('Montreal','QC'),
+('Montréal-Nord','QC'),
+('Percé','QC'),
+('Port-Cartier','QC'),
+('Quebec','QC'),
+('Rimouski','QC'),
+('Rouyn-Noranda','QC'),
+('Saguenay','QC'),
+('Saint-Eustache','QC'),
+('Saint-Hubert','QC'),
+('Sainte-Anne-de-Beaupré','QC'),
+('Sainte-Foy','QC'),
+('Sainte-Thérèse','QC'),
+('Sept-Îles','QC'),
+('Sherbrooke','QC'),
+('Sorel-Tracy','QC'),
+("Trois-Rivières",'QC'),
+("Val-d’Or",'QC'),
+('Waskaganish','QC');
+
+Saskatchewan
+------------
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Batoche','SK'),
+('Cumberland House', 'SK'),
+('Estevan', 'SK'),
+('Flin Flon', 'SK'),
+('Moose Jaw', 'SK'),
+('Prince Albert','SK'),
+('Regina', 'SK'),
+('Saskatoon', 'SK'),
+('Uranium City', 'SK');
+
+Yukon
+-----
+INSERT INTO tCmp_City(cCity_Name, cProv_ID) 
+VALUES ('Dawson', 'YT'),
+('Watson Lake', 'YT'),
+('Whitehorse', 'YT');
+
+
+=================================================
+FLoor
+=================================================
+INSERT INTO tCmp_Floor
+VALUES ('01','FLOOR 01','0001','4','0001','0001'),
+       ('02','FLOOR 02','0001','4','0002','0002'),
+       ('03','FLOOR 03','0001','4','0003','0003'),
+       ('04','FLOOR 04','0001','4','0003','0004');
+
+=================================================
+Department
+=================================================
+Insert into tCmp_Dept
+VALUES('0001','STOW',   '0005','0001'),
+      ('0002','RECEIVE','0006','0002'),
+      ('0003','PICK',   '0007','0003'),
+      ('0004','PACK',   '0008','0003'),
+      ('0005','TRANS',  '0009','0004'),
+      ('0006','ICQA',   '0010','0005');
+
+================================================
+Floor Sides
+================================================
+insert into tCmp_FlrSide
+values('02','SOUTH', '01'),
+      ('04','NORTH','01'),
+      ('01','WEST', '01'),
+      ('03','EAST', '01'),
+
+      ('02','SOUTH', '02'),
+      ('04','NORTH','02'),
+      ('01','WEST', '02'),
+      ('03','EAST', '02'),
+
+      ('02','SOUTH', '03'),
+      ('04','NORTH','03'),
+      ('01','WEST', '03'),
+      ('03','EAST', '03'),
+
+      ('02','SOUTH', '04'),
+      ('04','NORTH','04'),
+      ('01','WEST', '04'),
+      ('03','EAST', '04');
+
+================================================
+Stations
+================================================
+
+insert into tCmp_Stations
+values('1401','UNIVERSAL','01','04'),
+      ('1402','UNIVERSAL','01','04'),
+      ('1403','UNIVERSAL','01','04'),
+      ('1404','UNIVERSAL','01','04'),
+      ('1405','UNIVERSAL','01','04'),
+      ('1406','UNIVERSAL','01','04'),
+      ('1407','UNIVERSAL','01','04'),
+      ('1408','UNIVERSAL','01','04'),
+      ('1409','UNIVERSAL','01','04'),
+      ('1410','UNIVERSAL','01','04'),
+      ('1411','UNIVERSAL','01','04'),
+      ('1412','UNIVERSAL','01','04'),
+      ('1413','UNIVERSAL','01','04'),
+      ('1414','UNIVERSAL','01','04'),
+      ('1415','UNIVERSAL','01','04'),
+      ('1416','UNIVERSAL','01','04'),
+      ('1417','UNIVERSAL','01','04'),
+      ('1418','UNIVERSAL','01','04'),
+      ('1419','UNIVERSAL','01','04'),
+      ('1420','UNIVERSAL','01','04'),
+      ('1421','UNIVERSAL','01','04'),
+      ('1422','UNIVERSAL','01','04'),
+      ('1423','UNIVERSAL','01','04'),
+      ('1424','UNIVERSAL','01','04'),
+      ('1425','UNIVERSAL','01','04'),
+
+      ('1201','UNIVERSAL','01','02'),
+      ('1202','UNIVERSAL','01','02'),
+      ('1203','UNIVERSAL','01','02'),
+      ('1204','UNIVERSAL','01','02'),
+      ('1205','UNIVERSAL','01','02'),
+      ('1206','UNIVERSAL','01','02'),
+      ('1207','UNIVERSAL','01','02'),
+      ('1208','UNIVERSAL','01','02'),
+      ('1209','UNIVERSAL','01','02'),
+      ('1210','UNIVERSAL','01','02'),
+      ('1211','UNIVERSAL','01','02'),
+      ('1212','UNIVERSAL','01','02'),
+      ('1213','UNIVERSAL','01','02'),
+      ('1214','UNIVERSAL','01','02'),
+      ('1215','UNIVERSAL','01','02'),
+      ('1216','UNIVERSAL','01','02'),
+      ('1217','UNIVERSAL','01','02'),
+      ('1218','UNIVERSAL','01','02'),
+      ('1219','UNIVERSAL','01','02'),
+      ('1220','UNIVERSAL','01','02'),
+      ('1221','UNIVERSAL','01','02'),
+      ('1222','UNIVERSAL','01','02'),
+      ('1223','UNIVERSAL','01','02'),
+      ('1224','UNIVERSAL','01','02'),
+      ('1225','UNIVERSAL','01','02'),
+
+      ('1101','UNIVERSAL','01','01'),
+      ('1102','UNIVERSAL','01','01'),
+      ('1103','UNIVERSAL','01','01'),
+      ('1104','UNIVERSAL','01','01'),
+      ('1105','UNIVERSAL','01','01'),
+      ('1106','UNIVERSAL','01','01'),
+      ('1107','UNIVERSAL','01','01'),
+      ('1108','UNIVERSAL','01','01'),
+      ('1109','UNIVERSAL','01','01'),
+      ('1110','UNIVERSAL','01','01'),
+      ('1111','UNIVERSAL','01','01'),
+      ('1112','UNIVERSAL','01','01'),
+      ('1113','UNIVERSAL','01','01'),
+      ('1114','UNIVERSAL','01','01'),
+      ('1115','UNIVERSAL','01','01'),
+      ('1116','UNIVERSAL','01','01'),
+      ('1117','UNIVERSAL','01','01'),
+      ('1118','UNIVERSAL','01','01'),
+      ('1119','UNIVERSAL','01','01'),
+      ('1120','UNIVERSAL','01','01'),
+
+      ('1301','UNIVERSAL','01','03'),
+      ('1302','UNIVERSAL','01','03'),
+      ('1303','UNIVERSAL','01','03'),
+      ('1304','UNIVERSAL','01','03'),
+      ('1305','UNIVERSAL','01','03'),
+      ('1306','UNIVERSAL','01','03'),
+      ('1307','UNIVERSAL','01','03'),
+      ('1308','UNIVERSAL','01','03'),
+      ('1309','UNIVERSAL','01','03'),
+      ('1310','UNIVERSAL','01','03'),
+      ('1311','UNIVERSAL','01','03'),
+      ('1312','UNIVERSAL','01','03'),
+      ('1313','UNIVERSAL','01','03'),
+      ('1314','UNIVERSAL','01','03'),
+      ('1315','UNIVERSAL','01','03'),
+      ('1316','UNIVERSAL','01','03'),
+      ('1317','UNIVERSAL','01','03'),
+      ('1318','UNIVERSAL','01','03'),
+      ('1319','UNIVERSAL','01','03'),
+      ('1320','UNIVERSAL','01','03'),
+
+      ('2401','UNIVERSAL','02','04'),
+      ('2402','UNIVERSAL','02','04'),
+      ('2403','UNIVERSAL','02','04'),
+      ('2404','UNIVERSAL','02','04'),
+      ('2405','UNIVERSAL','02','04'),
+      ('2406','UNIVERSAL','02','04'),
+      ('2407','UNIVERSAL','02','04'),
+      ('2408','UNIVERSAL','02','04'),
+      ('2409','UNIVERSAL','02','04'),
+      ('2410','UNIVERSAL','02','04'),
+      ('2411','UNIVERSAL','02','04'),
+      ('2412','UNIVERSAL','02','04'),
+      ('2413','UNIVERSAL','02','04'),
+      ('2414','UNIVERSAL','02','04'),
+      ('2415','UNIVERSAL','02','04'),
+      ('2416','UNIVERSAL','02','04'),
+      ('2417','UNIVERSAL','02','04'),
+      ('2418','UNIVERSAL','02','04'),
+      ('2419','UNIVERSAL','02','04'),
+      ('2420','UNIVERSAL','02','04'),
+      ('2421','UNIVERSAL','02','04'),
+      ('2422','UNIVERSAL','02','04'),
+      ('2423','UNIVERSAL','02','04'),
+      ('2424','UNIVERSAL','02','04'),
+      ('2425','UNIVERSAL','02','04'),
+
+      ('2201','UNIVERSAL','02','02'),
+      ('2202','UNIVERSAL','02','02'),
+      ('2203','UNIVERSAL','02','02'),
+      ('2204','UNIVERSAL','02','02'),
+      ('2205','UNIVERSAL','02','02'),
+      ('2206','UNIVERSAL','02','02'),
+      ('2207','UNIVERSAL','02','02'),
+      ('2208','UNIVERSAL','02','02'),
+      ('2209','UNIVERSAL','02','02'),
+      ('2210','UNIVERSAL','02','02'),
+      ('2211','UNIVERSAL','02','02'),
+      ('2212','UNIVERSAL','02','02'),
+      ('2213','UNIVERSAL','02','02'),
+      ('2214','UNIVERSAL','02','02'),
+      ('2215','UNIVERSAL','02','02'),
+      ('2216','UNIVERSAL','02','02'),
+      ('2217','UNIVERSAL','02','02'),
+      ('2218','UNIVERSAL','02','02'),
+      ('2219','UNIVERSAL','02','02'),
+      ('2220','UNIVERSAL','02','02'),
+      ('2221','UNIVERSAL','02','02'),
+      ('2222','UNIVERSAL','02','02'),
+      ('2223','UNIVERSAL','02','02'),
+      ('2224','UNIVERSAL','02','02'),
+      ('2225','UNIVERSAL','02','02'),
+
+      ('2101','UNIVERSAL','02','01'),
+      ('2102','UNIVERSAL','02','01'),
+      ('2103','UNIVERSAL','02','01'),
+      ('2104','UNIVERSAL','02','01'),
+      ('2105','UNIVERSAL','02','01'),
+      ('2106','UNIVERSAL','02','01'),
+      ('2107','UNIVERSAL','02','01'),
+      ('2108','UNIVERSAL','02','01'),
+      ('2109','UNIVERSAL','02','01'),
+      ('2110','UNIVERSAL','02','01'),
+      ('2111','UNIVERSAL','02','01'),
+      ('2112','UNIVERSAL','02','01'),
+      ('2113','UNIVERSAL','02','01'),
+      ('2114','UNIVERSAL','02','01'),
+      ('2115','UNIVERSAL','02','01'),
+      ('2116','UNIVERSAL','02','01'),
+      ('2117','UNIVERSAL','02','01'),
+      ('2118','UNIVERSAL','02','01'),
+      ('2119','UNIVERSAL','02','01'),
+      ('2120','UNIVERSAL','02','01'),
+
+      ('2301','UNIVERSAL','02','03'),
+      ('2302','UNIVERSAL','02','03'),
+      ('2303','UNIVERSAL','02','03'),
+      ('2304','UNIVERSAL','02','03'),
+      ('2305','UNIVERSAL','02','03'),
+      ('2306','UNIVERSAL','02','03'),
+      ('2307','UNIVERSAL','02','03'),
+      ('2308','UNIVERSAL','02','03'),
+      ('2309','UNIVERSAL','02','03'),
+      ('2310','UNIVERSAL','02','03'),
+      ('2311','UNIVERSAL','02','03'),
+      ('2312','UNIVERSAL','02','03'),
+      ('2313','UNIVERSAL','02','03'),
+      ('2314','UNIVERSAL','02','03'),
+      ('2315','UNIVERSAL','02','03'),
+      ('2316','UNIVERSAL','02','03'),
+      ('2317','UNIVERSAL','02','03'),
+      ('2318','UNIVERSAL','02','03'),
+      ('2319','UNIVERSAL','02','03'),
+      ('2320','UNIVERSAL','02','03'),
+
+      ('3401','UNIVERSAL','03','04'),
+      ('3402','UNIVERSAL','03','04'),
+      ('3403','UNIVERSAL','03','04'),
+      ('3404','UNIVERSAL','03','04'),
+      ('3405','UNIVERSAL','03','04'),
+      ('3406','UNIVERSAL','03','04'),
+      ('3407','UNIVERSAL','03','04'),
+      ('3408','UNIVERSAL','03','04'),
+      ('3409','UNIVERSAL','03','04'),
+      ('3410','UNIVERSAL','03','04'),
+      ('3411','UNIVERSAL','03','04'),
+      ('3412','UNIVERSAL','03','04'),
+      ('3413','UNIVERSAL','03','04'),
+      ('3414','UNIVERSAL','03','04'),
+      ('3415','UNIVERSAL','03','04'),
+      ('3416','UNIVERSAL','03','04'),
+      ('3417','UNIVERSAL','03','04'),
+      ('3418','UNIVERSAL','03','04'),
+      ('3419','UNIVERSAL','03','04'),
+      ('3420','UNIVERSAL','03','04'),
+      ('3421','UNIVERSAL','03','04'),
+      ('3422','UNIVERSAL','03','04'),
+      ('3423','UNIVERSAL','03','04'),
+      ('3424','UNIVERSAL','03','04'),
+      ('3425','UNIVERSAL','03','04'),
+
+      ('3201','UNIVERSAL','03','02'),
+      ('3202','UNIVERSAL','03','02'),
+      ('3203','UNIVERSAL','03','02'),
+      ('3204','UNIVERSAL','03','02'),
+      ('3205','UNIVERSAL','03','02'),
+      ('3206','UNIVERSAL','03','02'),
+      ('3207','UNIVERSAL','03','02'),
+      ('3208','UNIVERSAL','03','02'),
+      ('3209','UNIVERSAL','03','02'),
+      ('3210','UNIVERSAL','03','02'),
+      ('3211','UNIVERSAL','03','02'),
+      ('3212','UNIVERSAL','03','02'),
+      ('3213','UNIVERSAL','03','02'),
+      ('3214','UNIVERSAL','03','02'),
+      ('3215','UNIVERSAL','03','02'),
+      ('3216','UNIVERSAL','03','02'),
+      ('3217','UNIVERSAL','03','02'),
+      ('3218','UNIVERSAL','03','02'),
+      ('3219','UNIVERSAL','03','02'),
+      ('3220','UNIVERSAL','03','02'),
+      ('3221','UNIVERSAL','03','02'),
+      ('3222','UNIVERSAL','03','02'),
+      ('3223','UNIVERSAL','03','02'),
+      ('3224','UNIVERSAL','03','02'),
+      ('3225','UNIVERSAL','03','02'),
+
+      ('3101','UNIVERSAL','03','01'),
+      ('3102','UNIVERSAL','03','01'),
+      ('3103','UNIVERSAL','03','01'),
+      ('3104','UNIVERSAL','03','01'),
+      ('3105','UNIVERSAL','03','01'),
+      ('3106','UNIVERSAL','03','01'),
+      ('3107','UNIVERSAL','03','01'),
+      ('3108','UNIVERSAL','03','01'),
+      ('3109','UNIVERSAL','03','01'),
+      ('3110','UNIVERSAL','03','01'),
+      ('3111','UNIVERSAL','03','01'),
+      ('3112','UNIVERSAL','03','01'),
+      ('3113','UNIVERSAL','03','01'),
+      ('3114','UNIVERSAL','03','01'),
+      ('3115','UNIVERSAL','03','01'),
+      ('3116','UNIVERSAL','03','01'),
+      ('3117','UNIVERSAL','03','01'),
+      ('3118','UNIVERSAL','03','01'),
+      ('3119','UNIVERSAL','03','01'),
+      ('3120','UNIVERSAL','03','01'),
+
+      ('3301','UNIVERSAL','03','03'),
+      ('3302','UNIVERSAL','03','03'),
+      ('3303','UNIVERSAL','03','03'),
+      ('3304','UNIVERSAL','03','03'),
+      ('3305','UNIVERSAL','03','03'),
+      ('3306','UNIVERSAL','03','03'),
+      ('3307','UNIVERSAL','03','03'),
+      ('3308','UNIVERSAL','03','03'),
+      ('3309','UNIVERSAL','03','03'),
+      ('3310','UNIVERSAL','03','03'),
+      ('3311','UNIVERSAL','03','03'),
+      ('3312','UNIVERSAL','03','03'),
+      ('3313','UNIVERSAL','03','03'),
+      ('3314','UNIVERSAL','03','03'),
+      ('3315','UNIVERSAL','03','03'),
+      ('3316','UNIVERSAL','03','03'),
+      ('3317','UNIVERSAL','03','03'),
+      ('3318','UNIVERSAL','03','03'),
+      ('3319','UNIVERSAL','03','03'),
+      ('3320','UNIVERSAL','03','03'),
+
+      ('4401','UNIVERSAL','04','04'),
+      ('4402','UNIVERSAL','04','04'),
+      ('4403','UNIVERSAL','04','04'),
+      ('4404','UNIVERSAL','04','04'),
+      ('4405','UNIVERSAL','04','04'),
+      ('4406','UNIVERSAL','04','04'),
+      ('4407','UNIVERSAL','04','04'),
+      ('4408','UNIVERSAL','04','04'),
+      ('4409','UNIVERSAL','04','04'),
+      ('4410','UNIVERSAL','04','04'),
+      ('4411','UNIVERSAL','04','04'),
+      ('4412','UNIVERSAL','04','04'),
+      ('4413','UNIVERSAL','04','04'),
+      ('4414','UNIVERSAL','04','04'),
+      ('4415','UNIVERSAL','04','04'),
+      ('4416','UNIVERSAL','04','04'),
+      ('4417','UNIVERSAL','04','04'),
+      ('4418','UNIVERSAL','04','04'),
+      ('4419','UNIVERSAL','04','04'),
+      ('4420','UNIVERSAL','04','04'),
+      ('4421','UNIVERSAL','04','04'),
+      ('4422','UNIVERSAL','04','04'),
+      ('4423','UNIVERSAL','04','04'),
+      ('4424','UNIVERSAL','04','04'),
+      ('4425','UNIVERSAL','04','04'),
+
+      ('4201','UNIVERSAL','04','02'),
+      ('4202','UNIVERSAL','04','02'),
+      ('4203','UNIVERSAL','04','02'),
+      ('4204','UNIVERSAL','04','02'),
+      ('4205','UNIVERSAL','04','02'),
+      ('4206','UNIVERSAL','04','02'),
+      ('4207','UNIVERSAL','04','02'),
+      ('4208','UNIVERSAL','04','02'),
+      ('4209','UNIVERSAL','04','02'),
+      ('4210','UNIVERSAL','04','02'),
+      ('4211','UNIVERSAL','04','02'),
+      ('4212','UNIVERSAL','04','02'),
+      ('4213','UNIVERSAL','04','02'),
+      ('4214','UNIVERSAL','04','02'),
+      ('4215','UNIVERSAL','04','02'),
+      ('4216','UNIVERSAL','04','02'),
+      ('4217','UNIVERSAL','04','02'),
+      ('4218','UNIVERSAL','04','02'),
+      ('4219','UNIVERSAL','04','02'),
+      ('4220','UNIVERSAL','04','02'),
+      ('4221','UNIVERSAL','04','02'),
+      ('4222','UNIVERSAL','04','02'),
+      ('4223','UNIVERSAL','04','02'),
+      ('4224','UNIVERSAL','04','02'),
+      ('4225','UNIVERSAL','04','02'),
+
+      ('4101','UNIVERSAL','04','01'),
+      ('4102','UNIVERSAL','04','01'),
+      ('4103','UNIVERSAL','04','01'),
+      ('4104','UNIVERSAL','04','01'),
+      ('4105','UNIVERSAL','04','01'),
+      ('4106','UNIVERSAL','04','01'),
+      ('4107','UNIVERSAL','04','01'),
+      ('4108','UNIVERSAL','04','01'),
+      ('4109','UNIVERSAL','04','01'),
+      ('4110','UNIVERSAL','04','01'),
+      ('4111','UNIVERSAL','04','01'),
+      ('4112','UNIVERSAL','04','01'),
+      ('4113','UNIVERSAL','04','01'),
+      ('4114','UNIVERSAL','04','01'),
+      ('4115','UNIVERSAL','04','01'),
+      ('4116','UNIVERSAL','04','01'),
+      ('4117','UNIVERSAL','04','01'),
+      ('4118','UNIVERSAL','04','01'),
+      ('4119','UNIVERSAL','04','01'),
+      ('4120','UNIVERSAL','04','01'),
+
+      ('4301','UNIVERSAL','04','03'),
+      ('4302','UNIVERSAL','04','03'),
+      ('4303','UNIVERSAL','04','03'),
+      ('4304','UNIVERSAL','04','03'),
+      ('4305','UNIVERSAL','04','03'),
+      ('4306','UNIVERSAL','04','03'),
+      ('4307','UNIVERSAL','04','03'),
+      ('4308','UNIVERSAL','04','03'),
+      ('4309','UNIVERSAL','04','03'),
+      ('4310','UNIVERSAL','04','03'),
+      ('4311','UNIVERSAL','04','03'),
+      ('4312','UNIVERSAL','04','03'),
+      ('4313','UNIVERSAL','04','03'),
+      ('4314','UNIVERSAL','04','03'),
+      ('4315','UNIVERSAL','04','03'),
+      ('4316','UNIVERSAL','04','03'),
+      ('4317','UNIVERSAL','04','03'),
+      ('4318','UNIVERSAL','04','03'),
+      ('4319','UNIVERSAL','04','03'),
+      ('4320','UNIVERSAL','04','03');
+
+
+===========================================================
+Smoke, Fire, Heat
+===========================================================
+insert into tCmp_HeatData values( '00', '01', '01');
+insert into tCmp_HeatData values( '00', '01', '02');
+insert into tCmp_HeatData values( '00', '01', '03');
+insert into tCmp_HeatData values( '00', '01', '04');
+insert into tCmp_HeatData values( '00', '02', '01');
+insert into tCmp_HeatData values( '00', '02', '02');
+insert into tCmp_HeatData values( '00', '02', '03');
+insert into tCmp_HeatData values( '00', '02', '04');
+insert into tCmp_HeatData values( '00', '03', '01');
+insert into tCmp_HeatData values( '00', '03', '02');
+insert into tCmp_HeatData values( '00', '03', '03');
+insert into tCmp_HeatData values( '00', '03', '04');
+insert into tCmp_HeatData values( '00', '04', '01');
+insert into tCmp_HeatData values( '00', '04', '02');
+insert into tCmp_HeatData values( '00', '04', '03');
+insert into tCmp_HeatData values( '00', '04', '04');
+
+insert into tCmp_FireData values( '00', '01', '01');
+insert into tCmp_FireData values( '00', '01', '02');
+insert into tCmp_FireData values( '00', '01', '03');
+insert into tCmp_FireData values( '00', '01', '04');
+insert into tCmp_FireData values( '00', '02', '01');
+insert into tCmp_FireData values( '00', '02', '02');
+insert into tCmp_FireData values( '00', '02', '03');
+insert into tCmp_FireData values( '00', '02', '04');
+insert into tCmp_FireData values( '00', '03', '01');
+insert into tCmp_FireData values( '00', '03', '02');
+insert into tCmp_FireData values( '00', '03', '03');
+insert into tCmp_FireData values( '00', '03', '04');
+insert into tCmp_FireData values( '00', '04', '01');
+insert into tCmp_FireData values( '00', '04', '02');
+insert into tCmp_FireData values( '00', '04', '03');
+insert into tCmp_FireData values( '00', '04', '04');
+
+
+insert into tCmp_SmokeData values( '00', '01', '01');
+insert into tCmp_SmokeData values( '00', '01', '02');
+insert into tCmp_SmokeData values( '00', '01', '03');
+insert into tCmp_SmokeData values( '00', '01', '04');
+insert into tCmp_SmokeData values( '00', '02', '01');
+insert into tCmp_SmokeData values( '00', '02', '02');
+insert into tCmp_SmokeData values( '00', '02', '03');
+insert into tCmp_SmokeData values( '00', '02', '04');
+insert into tCmp_SmokeData values( '00', '03', '01');
+insert into tCmp_SmokeData values( '00', '03', '02');
+insert into tCmp_SmokeData values( '00', '03', '03');
+insert into tCmp_SmokeData values( '00', '03', '04');
+insert into tCmp_SmokeData values( '00', '04', '01');
+insert into tCmp_SmokeData values( '00', '04', '02');
+insert into tCmp_SmokeData values( '00', '04', '03');
+insert into tCmp_SmokeData values( '00', '04', '04');
+
+====================================================
+tCmp_Type
+===================================================
+cEmp_Type	varchar(4)
+cType_Desc	varchar(50)
+====================================================
+Company Location
+====================================================
+Insert into tcmp_loc 
+values('0001','Brampton YYZ4', 
+       '123 Heritage Hills Road',' ', 'BRAMPTON', 
+       'L7T8B4', 'ON', 'CANADA', '9051234567', 
+       'MYWAREHOUSEBRAMPTON@MYWH.COM'
+      );
+v
+
+====================================================
+Employee Level
+====================================================
+insert into tEmp_Level ("01","ASSOCIATE Level-1"),
+                       ("02","ASSOCIATE Level-2"),
+                       ("03","ASSOCIATE Level-3"),
+                       ("04","ASSOCIATE Levzl-4"),
+                       ("05","ASSOCIATE Level-5")
+
+
+====================================================
+Employee Main
+====================================================
+insert into tEmp_Main(cEmp_ID,
+                      cEmp_FName,	
+                      cEmp_LName,
+                      cEmp_MName,
+                      cEmp_Login,
+                      cEmp_JoinDate,
+                      cEmp_Manager,
+                      cEmp_Type,
+                      cEmp_Level,
+                      cLoc_ID,
+                      cEmp_ContactNo,
+                      cEmpContactEmail,
+                      cEmp_Emergency1,
+                      cEmp_Emergency2,
+                      cDept_ID)
+			  values( '004',
+                      'RABIA',
+                      'IQBAL',
+                      ' ',
+                      UPPER(LEFT('RABIA',3)),
+                      curdate(),
+                      '0001',
+                      '01',
+                      '03',
+                      '01',
+                      '6479211122',
+                      'rabiaiqbal@gmail.com',
+                      '6479221212',
+                      '4169212222',
+                      '0001'
+                      
+                      )
+===================================================
+Messages 
+===================================================
+INSERT INTO tCmp_FlrMsgs(cFlrMsg_ID,cFlrMsg_Desc) 
+VALUES ('01','General Messages');
+INSERT INTO tCmp_FlrMsgs(cFlrMsg_ID,cFlrMsg_Desc) 
+VALUES ('02','Informative Messages');
+INSERT INTO tCmp_FlrMsgs(cFlrMsg_ID,cFlrMsg_Desc) 
+VALUES ('03','Administrative Messages');
+INSERT INTO tCmp_FlrMsgs(cFlrMsg_ID,cFlrMsg_Desc) 
+VALUES ('04','Emergency Messages');
+
+
+===================================================
+Exits
+===================================================
+INSERT INTO tCmp_FCExits(cExitNo, cFlrSide_ID, is_active) 
+VALUES (1,'01',true),
+(2,'01',true),
+(3,'01',true),
+(4,'01',true),
+(5,'01',true),
+(6,'01',true),
+(7,'01',true),
+(8,'01',true),
+(9,'01',true),
+(10,'01',true),
+(11,'02',true),
+(12,'02',true),
+(13,'02',true),
+(14,'02',true),
+(15,'02',true),
+(16,'02',true),
+(17,'02',true),
+(18,'02',true),
+(19,'02',true),
+(20,'02',true),
+(21,'03',true),
+(22,'03',true),
+(23,'03',true),
+(24,'03',true),
+(25,'03',true),
+(26,'03',true),
+(27,'03',true),
+(28,'03',true),
+(29,'03',true),
+(30,'03',true),
+(31,'04',true),
+(32,'04',true),
+(33,'04',true),
+(34,'04',true),
+(35,'04',true),
+(36,'04',true),
+(37,'04',true),
+(38,'04',true),
+(39,'04',true),
+(40,'04',true);
+
+======================
+insert into tcmp_msgdb(cFlrMSg_ID,cMsg_ID,cMsg) 
+values('02','01091824','This is a test of informative messages which can be broadcast on all floors'),
+      ('02','01091824','This is a test of informative messages which can be broadcast on all sides'),
+      ('02','01091824','This is a test of informative messages which can be broadcast on all sides+floors')

@@ -1,0 +1,360 @@
+from tkinter import ttk
+from tkinter import *
+from tkinter import messagebox  # import messagebox from tkinter
+import customtkinter
+
+from PIL import Image, ImageTk
+
+# ------------------- Main Window Setting -----------------------
+window = Tk() # where labels are going to be displayed
+win = customtkinter.CTk()
+
+width = win.winfo_screenwidth()
+height = win.winfo_screenheight()
+
+win.title("FEAS - Floor Manager" + "  w-" + str(width) + "   h-" + str(height))
+win.attributes('-fullscreen', True)
+
+
+# window.resizable(False, False)
+#window.update_idletasks()
+#window.overrideredirect(True)
+# setting window size to max and title
+#window.geometry("%dx%d" % (width, height))
+#window.title("FEAS - Fire Evacuation Automation System" + "  w-" + str(width) + "   h-" + str(height))
+# ------------------- End Main Window Setting -----------------------
+"""
+def order():
+    if (mRdoBtnVal.get() == 0):
+        messagebox.showinfo("Order", "You have ordered a pizza")
+    elif (mRdoBtnVal.get() == 1):
+        messagebox.showinfo("Order", "You have ordered a hamburger")
+        #messagebox.showinfo("Order", "You have ordered a hamburger")
+
+    elif (mRdoBtnVal.get() == 2):
+        messagebox.showinfo("Order", "You have ordered a hotdog")
+    else:
+        messagebox.showinfo("Order", "You have ordered nothing")
+
+
+def pListOrder():
+    if (mRdoBtnVal.get() == 0):
+        messagebox.showinfo("Order", "You have ordered a pizza")
+    elif (mRdoBtnVal.get() == 1):
+        messagebox.showinfo("Order", "You have ordered a hamburger")
+        #messagebox.showinfo("Order", "You have ordered a hamburger")
+
+    elif (mRdoBtnVal.get() == 2):
+        messagebox.showinfo("Order", "You have ordered a hotdog")
+    else:
+        messagebox.showinfo("Order", "You have ordered nothing")
+
+
+
+def pChkBtn():
+    ChkBtnVal = "NULL"
+    if mchkbtnvar.get() == 1:
+        ChkBtnVal = "Yes"
+        messagebox.showinfo("Check Value", "Am I Checked -->? " + ChkBtnVal)
+    else:
+        ChkBtnVal = "No"
+        messagebox.showinfo("Check Value", "Am I Checked -->? " + ChkBtnVal)
+
+        messagebox.showinfo("Check Value", "I am a --> " + str(mchkbtnvar.get()))
+"""
+def pButtonHome():
+    messagebox.showinfo("Home", "Home..." )
+
+def pButtonExit():
+    messagebox.showinfo("Exit", "Exiting Application...")
+    #window.destroy
+    exit() # closes the window
+
+def selection_changed(event):
+    selection = ddFloorLst.get()
+    messagebox.showinfo(
+        title="New Selection",
+        message=f"Selected option: {selection}"
+    )
+
+
+
+mchkbtnvar = IntVar()
+photo         = PhotoImage(file='D:\\LearnTKinter\\db1.png')
+framemain     = PhotoImage(file='D:\\GitHub\\feas\\pics\\mainframe.png')
+photoExit     = PhotoImage(file='D:\\GitHub\\feas\\ico\\exit-1.png')
+photoHome     = PhotoImage(file='D:\\GitHub\\feas\\ico\\home-1.png')
+photook       = PhotoImage(file='D:\\GitHub\\feas\\ico\\add-02.png')
+photocancel   = PhotoImage(file='D:\\GitHub\\feas\\ico\\del-02.png')
+photoMaleId   = PhotoImage(file='D:\\GitHub\\feas\\pics\\MaleID-1.png')
+photoFemaleId = PhotoImage(file='D:\\GitHub\\feas\\pics\\FemaleID-1.png')
+
+mcounter = 0
+
+def create_circle(x, y, r, canvasName): #center coordinates, radius
+    x0 = x - r
+    y0 = y - r
+    x1 = x + r
+    y1 = y + r
+    return canvasName.create_oval(x0, y0, x1, y1)
+
+# Main whole screen frame fmFrame - Frame Main Frame
+fmFrame=Frame(window,
+               #corner_radius=20,
+               relief=RIDGE,
+               bd=2,
+               bg='white',
+
+               padx=20,
+               pady=20,
+               cursor='hand1'
+             )
+fmFrame.pack(side=BOTTOM, fill=BOTH, expand=1)
+
+# ======================== Floor Dropdown / Text =====================================
+# label 1 on main frame screen
+mlblFloor = Label(window,
+                  text='Select Floor:',
+                  font=('Arial', 12,'bold'),
+                  background='white',
+                  foreground='brown',
+
+                  #relief=RAISED, bd=10,
+                  #padx=20,
+                  #pady=20,
+                  #image=photo, compound='bottom'
+                 ) # label created for the window
+mlblFloor.place(x=1380, y=3)  # label added to the windown and displayed @ 50,100  the window coordinates
+
+
+# dropdown list on main frame window
+ddFloorLst = ttk.Combobox(fmFrame,
+                          font=('Arial', 10, 'bold'),
+                          state='readonly',
+                          justify=CENTER,
+                          values=(
+                                  "Floor 1",
+                                  "Floor 2",
+                                  "Floor 3",
+                                  "Floor 4",
+                                 )
+                          )
+ddFloorLst.place(x=1325, y=8)
+ddFloorLst.current(0)
+ddFloorLst.bind("<<ComboboxSelected>>", selection_changed)
+# ============================================================
+
+
+
+# ======================== Create Left Frame flFrame - Frame Left vertical Frame =========
+flFrame=Frame(window,
+               #corner_radius=20,
+               relief=RIDGE,
+               bd=5,
+               bg= '#3D8ACC', #'lightblue',
+               height=850,
+               width=112,
+               padx=10,
+               pady=10,
+               cursor='spider'
+              )
+
+flFrame.place(x=10, y=10)
+
+mButtonHome = Button(window,
+                    text='Home',
+                    font=('Arial', 10, 'bold'),
+                    image=photoHome, compound='top',
+                    state=ACTIVE,
+                    command=pButtonHome
+                  ) # label created for the window
+mButtonHome.place(x=30, y=200)
+mButtonExit = Button(window,
+                    text='Exit',
+                    font=('Arial', 10, 'bold'),
+                    image=photoExit, compound='top',
+                    state=ACTIVE,
+                    command=pButtonExit
+                  ) # label created for the window
+mButtonExit.place(x=30, y=350)
+mButtonExit = Button(window,
+                    text='Exit',
+                    font=('Arial', 5, 'bold'),
+                    image=photoExit, compound='top',
+                    state=ACTIVE,
+                    command=pButtonExit
+                  ) # label created for the window
+mButtonExit.place(x=30, y=500)
+# ======================== End Frame flFrame - Frame Left vertical Frame =========
+
+#fc1Frame  - Frame Manager Center Frame 1
+fc1Frame=Frame(window,
+               #corner_radius=20,
+               relief=RIDGE,
+               bd=5,
+               bg='#D9EAD3',
+               height=220,
+               width=800,
+               padx=20,
+               pady=20,
+               cursor='hand1'
+               )
+fc1Frame.place(x=540, y=65)
+
+# Header label for frame top for Floor for messages
+mlblthframe = Label(window,
+                    text='Floor Manager',
+                    font=('Calibri', 14,'bold'),
+                    background='black',
+                    foreground='white'
+                   ) # label created for the window
+mlblthframe.place(x=542, y=38)  # label added to the windown and displayed @ 50,100  the window coordinates
+
+# label Next to Center Frame
+mlblMain = Label(fmFrame,
+                 text='Floor Dashboard',
+                 font=('Calibri', 40, 'bold underline'),
+                 background='white',
+                 foreground='brown'
+               ) # label created for the window
+mlblMain.place(x=115, y=115)  # label added to the windown and displayed @ 50,100  the window coordinates
+
+
+mlblc1Floor = Label(fc1Frame,
+                 text='',
+                 font=('Calibri', 12, 'bold'),
+                 background='#D9EAD3',
+                 foreground='brown',
+                 image=photoFemaleId,
+                 compound='bottom'
+               ) # label created for the window
+mlblc1Floor.place(x=4, y=2)  # label added to the windown and displayed @ 50,100  the window coordinates
+
+
+mlblc1ManagerName = Label(fc1Frame,
+                          text='Tahir\nIqbal',
+                          font=('Calibri', 18, 'bold'),
+                          background='#D9EAD3',
+                          foreground='darkblue'
+                         ) # label created for the window
+mlblc1ManagerName.place(x=180, y=45)  # label added to the windown and displayed @ 50,100  the window coordinates
+mlblc1Contact = Label(fc1Frame,
+                 text='ID - @tahigiqb\n  #  - 077 123 4567\n@tahigiqb',
+                 font=('Calibri', 18,'bold'),
+                 background='#D9EAD3',
+                 foreground='black'
+               ) # label created for the window
+mlblc1Contact.place(x=380, y=35)  # label added to the windown and displayed @ 50,100  the window coordinates
+
+
+# ============================================================================
+
+# ============================= fc2Frame  - Frame Center Frame 2 ===============
+fc2Frame=Frame(window,
+               #corner_radius=20,
+               relief=RIDGE,
+               bd=5,
+               bg='#F4CCCC',
+               height=350,
+               width=600,
+               padx=20,
+               pady=20,
+               cursor='hand1'
+             )
+fc2Frame.place(x=185, y=330)
+
+# Header lable for frame 3 for Floor and Floor Associates
+mlblc2hframe = Label(window,
+                 text='Floor Supervisors',
+                 font=('Calibri', 14,'bold'),
+                 background='black',
+                 foreground='white'
+               ) # label created for the window
+mlblc2hframe.place(x=189, y=303)  # label added to the windown and displayed @ 50,100  the window coordinates
+
+# ============================= End of fc2Frame  - Frame Center Frame 2 =================
+
+fc3Frame=Frame(window,
+               #corner_radius=20,
+               relief=RIDGE,
+               bd=5,
+               bg='#D9D2E9',
+               height=350,
+               width=600,
+               padx=20,
+               pady=20,
+               cursor='hand1'
+             )
+fc3Frame.place(x=875, y=330)
+
+# Header lable for frame 3 for Floor and Floor Associates
+mlblc3hframe = Label(window,
+                 text='Floor Associates',
+                 font=('Calibri', 14,'bold'),
+                 background='black',
+                 foreground='white'
+               ) # label created for the window
+mlblc3hframe.place(x=879, y=303)  # label added to the windown and displayed @ 50,100  the window coordinates
+# ============================= End of fc3Frame  - Frame Center Frame 3 =================
+
+mlblbline = Label(window,
+                 text='=================================================================================================================================================',
+                 font=('Calibri', 12,'bold'),
+                 background='white',
+                 foreground='gray'
+               ) # label created for the window
+mlblbline.place(x=270, y=690)  # label added to the windown and displayed @ 50,100  the window coordinates
+
+fcbFrame=Frame(window,
+               #corner_radius=20,
+               relief=RIDGE,
+               bd=5,
+               bg='#84A1D9',
+               height=100,
+               width=1200,
+               padx=20,
+               pady=20,
+               cursor='hand1'
+             )
+fcbFrame.place(x=225, y=760)
+
+# Header label for frame bottom for Floor for messages
+mlblbhframe = Label(window,
+                 text='Floor Messages',
+                 font=('Calibri', 14,'bold'),
+                 background='black',
+                 foreground='white'
+               ) # label created for the window
+mlblbhframe.place(x=228, y=733)  # label added to the windown and displayed @ 50,100  the window coordinates
+
+# ============================= End of fc3Frame  - Frame Center Frame 3 =================
+"""
+# regular button 1
+mbuttonok= Button(window,
+                    text='OK',
+                    font=('Arial', 15, 'bold'),
+                    relief=RAISED, bd=10,
+                    padx=20,
+                    pady=20,
+                    image=photook, compound='top',
+                    state=ACTIVE,
+                    command=pButtonOk
+                  ) # label created for the window
+
+# regular button 2
+mbuttoncancel = Button(fmFrame,
+                        text='Cancel',
+                        font=('Arial', 15, 'bold'),
+                        relief=RAISED, bd=10,
+                        padx=20,
+                        pady=20,
+                        image=photocancel, compound='top',
+                        state=ACTIVE,
+                        command=pButtonCancel
+                      ) # label created for the window
+
+mbuttonok.place(x=50, y=350)
+mbuttoncancel.place(x=375, y=350)
+
+"""
+window.mainloop()

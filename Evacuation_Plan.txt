@@ -1,0 +1,17 @@
+Fire Alarm Triggered
+1
+John Doe
+Alice, Bob
+Use north exit and stairwell A
+2
+Jane Smith
+Charlie, Eve
+Use east exit and stairwell B
+3
+Michael Johnson
+Dan, Frank
+Use south exit and stairwell C
+4
+Emily Davis
+Grace, Harry
+Use west exit and stairwell D

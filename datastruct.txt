@@ -1,0 +1,69 @@
+insert into tEmp_Main (
+                                cEmp_ID,
+				cEmp_Login,
+				cEmp_FName,
+				cEmp_LName,
+				cEmp_MName,
+				cEmp_JoinDate,
+				cEmp_Manager,
+				cEmp_Type,
+				cEmp_Level,
+				cLoc_Code,
+				cEmp_ContactNo,
+				cEmpContactEmail,
+				cEmp_Emergency1,
+				cEmp_Emergency2,
+				cEmp_Emergency3,
+				cDept_ID
+				
+               )
+values         (
+	         'S20021115',
+                 'SARIQB02',
+                 'SARIM',
+                 'IQBAL',
+                 '',
+                 STR_TO_DATE('10/05/2021', '%m/%d/%Y'),
+                 'z19751011',
+                 '0011',
+                 '0001',
+                 '0001',
+                 '4160020002',
+                 'SARIMIQBAL20021115@company.com',
+                 '6470020002',
+                 '9050020002',
+                 '4168720002',
+                 '002'
+);  
+
+
+insert into tCmp_floor values('01', 'Floor 1', '0001', '04', '0001','0001');
+insert into tCmp_floor values('02', 'Floor 2', '0001', '04', '0002','0002');
+insert into tCmp_floor values('03', 'Floor 3', '0001', '04', '0003','0003');
+insert into tCmp_floor values('04', 'Floor 4', '0001', '04', '0004','0004');
+
+
+SET @@foreign_key_checks = 0;
+
+insert into temp_type values('01', 'Permanent');
+insert into temp_type values('02', 'Part-Time');
+
+commit;
+
+SET @@foreign_key_checks = 1;
+
+
+
+insert into tCmp_Loc values(
+                    '01',
+                    'BRAMPTON YYZ4',
+                    '123 ABC Road',
+                    ' ',
+                    'BRAMPTON',
+                       
+                    'L2P 7T2',
+                    'ON',
+                    'CANADA',
+                    '9051234567',
+                    'cmp1@abc.com'
+                     )

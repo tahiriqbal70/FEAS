@@ -1,0 +1,5 @@
+Starting database creation...
+***************************************
+Error: 1824 (HY000): Failed to open the referenced table 'rooms'
+Unsuccessful: Database creation failed.
+***************************************

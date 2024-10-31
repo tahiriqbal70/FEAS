@@ -1,0 +1,90 @@
+2024-09-30 15:19:08 - Fire: No fire detected
+2024-09-30 15:19:08 - Heat: Temperature: 100°F
+2024-09-30 15:19:08 - Smoke: Smoke Level: High
+2024-09-30 15:19:13 - Fire: Fire hazard near!
+2024-09-30 15:19:13 - Heat: Temperature: 101°F
+2024-09-30 15:19:13 - Smoke: Smoke Level: Medium
+2024-09-30 15:19:18 - Fire: Fire hazard near!
+2024-09-30 15:19:18 - Heat: Temperature: 89°F
+2024-09-30 15:19:18 - Smoke: Smoke Level: Medium
+2024-09-30 15:19:23 - Fire: No fire detected
+2024-09-30 15:19:23 - Heat: Temperature: 66°F
+2024-09-30 15:19:23 - Smoke: Smoke Level: Medium
+2024-09-30 15:19:28 - Fire: Fire detected!
+2024-09-30 15:19:28 - Heat: Temperature: 87°F
+2024-09-30 15:19:28 - Smoke: Smoke Level: High
+2024-09-30 15:19:33 - Fire: No fire detected
+2024-09-30 15:19:33 - Heat: Temperature: 94°F
+2024-09-30 15:19:33 - Smoke: Smoke Level: Medium
+2024-09-30 15:19:38 - Fire: Fire detected!
+2024-09-30 15:19:38 - Heat: Temperature: 102°F
+2024-09-30 15:19:38 - Smoke: Smoke Level: High
+2024-09-30 15:19:43 - Fire: No fire detected
+2024-09-30 15:19:43 - Heat: Temperature: 90°F
+2024-09-30 15:19:43 - Smoke: Smoke Level: High
+2024-09-30 15:19:48 - Fire: No fire detected
+2024-09-30 15:19:48 - Heat: Temperature: 79°F
+2024-09-30 15:19:48 - Smoke: Smoke Level: High
+2024-09-30 15:19:53 - Fire: No fire detected
+2024-09-30 15:19:53 - Heat: Temperature: 80°F
+2024-09-30 15:19:53 - Smoke: Smoke Level: Medium
+2024-09-30 15:19:58 - Fire: Fire hazard near!
+2024-09-30 15:19:58 - Heat: Temperature: 75°F
+2024-09-30 15:19:58 - Smoke: Smoke Level: Low
+2024-09-30 21:47:35 - Fire: Fire hazard near!
+2024-09-30 21:47:35 - Heat: Temperature: 96°F
+2024-09-30 21:47:35 - Smoke: Smoke Level: Critical
+2024-09-30 21:47:40 - Fire: Fire hazard near!
+2024-09-30 21:47:40 - Heat: Temperature: 65°F
+2024-09-30 21:47:40 - Smoke: Smoke Level: Critical
+2024-09-30 21:47:45 - Fire: No fire detected
+2024-09-30 21:47:45 - Heat: Temperature: 105°F
+2024-09-30 21:47:45 - Smoke: Smoke Level: Low
+2024-09-30 21:47:50 - Fire: Fire detected!
+2024-09-30 21:47:50 - Heat: Temperature: 75°F
+2024-09-30 21:47:50 - Smoke: Smoke Level: Low
+2024-09-30 21:47:55 - Fire: Fire hazard near!
+2024-09-30 21:47:55 - Heat: Temperature: 68°F
+2024-09-30 21:47:55 - Smoke: Smoke Level: High
+2024-09-30 21:48:00 - Fire: Fire detected!
+2024-09-30 21:48:00 - Heat: Temperature: 73°F
+2024-09-30 21:48:00 - Smoke: Smoke Level: High
+2024-09-30 21:48:05 - Fire: No fire detected
+2024-09-30 21:48:05 - Heat: Temperature: 83°F
+2024-09-30 21:48:05 - Smoke: Smoke Level: High
+2024-09-30 21:48:15 - Fire: Fire hazard near!
+2024-09-30 21:48:15 - Heat: Temperature: 94°F
+2024-09-30 21:48:15 - Smoke: Smoke Level: Critical
+2024-10-13 22:26:17 - Fire: Fire detected!
+2024-10-13 22:26:17 - Heat: Temperature: 79°F
+2024-10-13 22:26:17 - Smoke: Smoke Level: High
+2024-10-13 22:26:22 - Fire: Fire hazard near!
+2024-10-13 22:26:22 - Heat: Temperature: 83°F
+2024-10-13 22:26:22 - Smoke: Smoke Level: Medium
+2024-10-13 22:26:27 - Fire: No fire detected
+2024-10-13 22:26:27 - Heat: Temperature: 104°F
+2024-10-13 22:26:27 - Smoke: Smoke Level: Low
+2024-10-15 10:52:20 - Fire: Fire detected!
+2024-10-15 10:52:20 - Heat: Temperature: 101°F
+2024-10-15 10:52:20 - Smoke: Smoke Level: Medium
+2024-10-15 10:52:25 - Fire: No fire detected
+2024-10-15 10:52:25 - Heat: Temperature: 78°F
+2024-10-15 10:52:25 - Smoke: Smoke Level: Medium
+2024-10-27 21:08:46 - Fire: Fire detected!
+2024-10-27 21:08:46 - Heat: Temperature: 105°F
+2024-10-27 21:08:46 - Smoke: Smoke Level: Critical
+2024-10-27 21:08:51 - Fire: Fire detected!
+2024-10-27 21:08:51 - Heat: Temperature: 94°F
+2024-10-27 21:08:51 - Smoke: Smoke Level: Low
+2024-10-27 21:08:56 - Fire: No fire detected
+2024-10-27 21:08:56 - Heat: Temperature: 89°F
+2024-10-27 21:08:56 - Smoke: Smoke Level: Medium
+2024-10-27 21:09:01 - Fire: Fire detected!
+2024-10-27 21:09:01 - Heat: Temperature: 90°F
+2024-10-27 21:09:01 - Smoke: Smoke Level: High
+2024-10-27 21:09:06 - Fire: No fire detected
+2024-10-27 21:09:06 - Heat: Temperature: 95°F
+2024-10-27 21:09:06 - Smoke: Smoke Level: Critical
+2024-10-27 21:10:32 - Fire: Fire detected!
+2024-10-27 21:10:32 - Heat: Temperature: 95°F
+2024-10-27 21:10:32 - Smoke: Smoke Level: High
