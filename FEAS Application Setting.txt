@@ -1,0 +1,37 @@
+FEAS Application Setting
+
+Note - Before Running FEAS application, please install MySQL on localhost and use FEAS_Database.sql to import the database.
+
+host     = localhost
+user     = root
+password = MeOnly@007
+database = feas
+
+
+Main Module - FEAS.PY
+     User Name: admin
+     Password: password123
+
+FEAS Application Divided into four Parts:
+1- House Keeping
+2- Floor Information
+3- Fire Evacuation
+4- Logs And Reports
+
+
+1- House Keeping Module:
+   A) Company Setup - FCompany.py
+   B) Fire Exits    - FListExits.py
+   C) Admin Users   - FSysAdmin.py
+   D) DB Structure  - FDBStructure.py
+
+2- Floor Information Module:
+   A) Floor Status  - FFlrReport.py
+   B) Floor Details - FFlrDetail2.py
+
+3- Fire Evacuation Module:
+   A) Message Broadcasting - FBCasting.py
+   B) General Broadcasting - BFCast.py
+   C) System Message Types - FMsgType.py
+   D) Sensor Monitor       - FSensorMon.py
+   E) Exit Procedures      - FExitProc.py
