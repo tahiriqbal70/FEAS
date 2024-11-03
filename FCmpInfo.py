@@ -1,196 +1,143 @@
 import tkinter as tk
-import customtkinter as ctk
 from tkinter import messagebox
 import mysql.connector
 
-from FeasFrmCls import *
 
-
-# Database connection setup
-def db_connect():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="MeOnly@007",
-        database="feas"
-    )
-
-
-# Main Application Class
-class FloorManagerApp():
-    def __init__(self,root):
-        self.root = root #ctk.CTk()
-        self.root.title("FEAS Application - Company Information")
-        self.root.geometry("800x800")
-        ctk.set_appearance_mode("light")
-        ctk.set_default_color_theme("blue")
+class CompanyProfileApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Company Profile")
+        self.root.geometry("800x500")
         self.root.resizable(False, False)
-        self.root.eval('tk::PlaceWindow . center')  # Place window in the center of the screen
 
-        self.frm_factory = FeasFrmCls()
+        # Center the window on the screen
+        window_width, window_height = 800, 500
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        x_coordinate = (screen_width // 2) - (window_width // 2)
+        y_coordinate = (screen_height // 2) - (window_height // 2)
+        self.root.geometry(f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
 
-        # Setup MySQL connection
-        self.conn = db_connect()
-        self.create_frames()
-        print("Frames Created")
-        # Variables for form fields
-        self.loc_id = tk.StringVar()
-        self.loc_name = tk.StringVar()
-        self.loc_add1 = tk.StringVar()
-        self.loc_add2 = tk.StringVar()
-        self.loc_cty = tk.StringVar()
-        self.loc_phone = tk.StringVar()
-        self.loc_email = tk.StringVar()
-        self.loc_provid = tk.StringVar()
-        self.loc_zipc = tk.StringVar()
+        # Establish database connection
+        self.db_connection = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="MeOnly@007",
+            database="feas"
+        )
+        self.db_cursor = self.db_connection.cursor(dictionary=True)
 
-        # Create the layout
         self.create_widgets()
 
     def create_widgets(self):
-        # Heading
-        heading_label = ctk.CTkLabel(self.root, text="Company Information", font=("Arial", 30, "bold", "underline"))
-        heading_label.place(x=250, y=5)  #, columnspan=2, pady=10)
+        # Top Frame with Heading
+        top_frame = tk.Frame(self.root, bg="#4F81BD", height=60)
+        top_frame.place(x=0, y=0, width=800, height=60)
 
-        # Labels and Entry Fields
-        self.create_form()
+        heading_label = tk.Label(top_frame, text="Company Profile", font=("Arial", 18, "bold"), bg="#4F81BD",
+                                 fg="white")
+        heading_label.place(relx=0.5, rely=0.5, anchor="center")
 
-        # Load data into form
-        self.load_data()
+        # Main Form Frame
+        form_frame = tk.Frame(self.root, bg="white")
+        form_frame.place(x=100, y=80, width=600, height=300)
 
-    def create_form(self):
-        # Column 1: Labels
-        #labels = ["Location ID", "Location Name", "Address 1", "Address 2", "City", "Phone", "Email", "Province"]
-        #for i, label in enumerate(labels):
-        #ctk.CTkLabel(self.mFrmMgr, text=label).grid(row=i+1, column=0, padx=10, pady=5, sticky="e")
-        #    ctk.CTkLabel(self.mFrmMgr, text=label).place(row=i+5, column=0, padx=10, pady=5, sticky="e")
+        # Left and Right Subframes in Form Frame
+        left_frame = tk.Frame(form_frame, bg="white")
+        left_frame.place(x=0, y=0, width=300, height=300)
 
-        self.lbl_locid = customtkinter.CTkLabel(master=self.mFrmMgr, text="Location ID  : ", padx=5, pady=5,
-                                                text_color="white", font=("Arial", 14))
-        self.lbl_locid.place(x=60, y=50)
-        self.lbl_locnm = customtkinter.CTkLabel(master=self.mFrmMgr, text="Location Name: ", padx=5, pady=5,
-                                                text_color="white", font=("Arial", 14))
-        self.lbl_locnm.place(x=60, y=90)
-        self.lbl_add1 = customtkinter.CTkLabel(master=self.mFrmMgr, text="Address 1    : ", padx=5, pady=5,
-                                               text_color="white", font=("Arial", 14))
-        self.lbl_add1.place(x=60, y=130)
-        self.lbl_add2 = customtkinter.CTkLabel(master=self.mFrmMgr, text="Address 2    : ", padx=5, pady=5,
-                                               text_color="white", font=("Arial", 14))
-        self.lbl_add2.place(x=60, y=170)
-        self.lbl_prov = customtkinter.CTkLabel(master=self.mFrmMgr, text="Province     : ", padx=5, pady=5,
-                                               text_color="white", font=("Arial", 14))
-        self.lbl_prov.place(x=60, y=210)
-        self.lbl_city = customtkinter.CTkLabel(master=self.mFrmMgr, text="City         : ", padx=5, pady=5,
-                                               text_color="white", font=("Arial", 14))
-        self.lbl_city.place(x=60, y=250)
-        self.lbl_zipc = customtkinter.CTkLabel(master=self.mFrmMgr, text="Postal Code  : ", padx=5, pady=5,
-                                               text_color="white", font=("Arial", 14))
-        self.lbl_zipc.place(x=60, y=290)
-        self.lbl_phone = customtkinter.CTkLabel(master=self.mFrmMgr, text="Phone        : ", padx=5, pady=5,
-                                                text_color="white", font=("Arial", 14))
-        self.lbl_phone.place(x=60, y=330)
-        self.lbl_email = customtkinter.CTkLabel(master=self.mFrmMgr, text="Email         : ", padx=5, pady=5,
-                                                text_color="white", font=("Arial", 14))
-        self.lbl_email.place(x=60, y=370)
+        right_frame = tk.Frame(form_frame, bg="white")
+        right_frame.place(x=300, y=0, width=300, height=300)
 
-        # Column 2: Input fields
-        self.loc_id = ctk.CTkEntry(self.mFrmMgr, width=200) #, command=self.load_data)
-        self.loc_id.place(x=180, y=50)  #, padx=10, pady=5)
-        self.loc_name = ctk.CTkEntry(self.mFrmMgr, width=200)
-        self.loc_name.place(x=180, y=90)  #, padx=10, pady=5)
-        self.loc_add1 = ctk.CTkEntry(self.mFrmMgr, textvariable=self.loc_add1, width=200)
-        self.loc_add1.place(x=180, y=130)  #, padx=10, pady=5)
-        self.loc_add2 = ctk.CTkEntry(self.mFrmMgr, textvariable=self.loc_add2, width=200)
-        self.loc_add2.place(x=180, y=170)  #, padx=10, pady=5)
-        self.province_menu = ctk.CTkOptionMenu(self.mFrmMgr, variable=self.loc_provid, values=self.get_provinces())
-        self.province_menu.place(x=180, y=210)  #, padx=10, pady=5)
-        self.city_menu = ctk.CTkOptionMenu(self.mFrmMgr, variable=self.loc_cty, values=self.get_cities())
-        self.city_menu.place(x=180, y=250)  #, padx=10, pady=5)
-        """
-        self.loc_phone= ctk.CTkEntry(self.mFrmMgr)
-        self.loc_id.place(x=180, y=290) #, padx=10, pady=5)
-        self.loc_phone= ctk.CTkEntry(self.mFrmMgr)
-        self.loc_id.place(x=180, y=330) #, padx=10, pady=5)
-        self.loc_email= ctk.CTkEntry(self.mFrmMgr, textvariable=self.loc_email)
-        self.loc_id.place(x=180, y=370) #, padx=10, pady=5)
-		"""
-        # Buttons
-        self.btn_edit = ctk.CTkButton(self.mFrmMgr, text="Edit", command=self.edit_entry)
-        self.btn_edit.place(x=10, y=450)  #, pady=20, padx=20, sticky="e")
-        self.btn_save = ctk.CTkButton(self.mFrmMgr, text="Save", command=self.save_entry)
-        self.btn_save.place(x=170, y=450)  #, pady=20, padx=20, sticky="w")
-        self.btn_exit = ctk.CTkButton(self.mFrmMgr, text="Exit", command=self.root.quit)
-        self.btn_exit.place(x=330, y=450)  #, pady=20, padx=20)
+        # Retrieve tcmp_loc data
+        self.retrieve_tcmp_loc_data()
 
-    def get_cities(self):
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT cCity_Name FROM tcmp_City")
-        cities = [row[0] for row in cursor.fetchall()]
-        return cities
+        # Labels and Input Fields for tcmp_loc Columns
+        self.fields = [
+            ("Location:", "cLoc_ID"),
+            ("Location Name:", "cLoc_Name"),
+            ("Location Add 1:", "cLoc_Add1"),
+            ("Location Add 2:", "cLoc_Add2"),
+            ("Location City:", "cLoc_City"),
+            ("Location Zip Code:", "cLoc_zip"),
+            ("Province:", "cLoc_Porv"),
+            ("Country:", "cLoc_Country"),
+            ("Phone:", "cLoc_Phone"),
+            ("Email:", "cLoc_Email")
+        ]
 
-    def get_provinces(self):
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT cProv_Desc FROM tcmp_province")
-        provinces = [row[0] for row in cursor.fetchall()]
-        return provinces
+        self.input_vars = {}
 
-    def load_data(self):
-        print("Loading data from database")
-        # Load current values from the database into the form
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT * FROM tcmp_loc WHERE cLoc_ID = %s", (self.loc_id.get(),))
-        row = cursor.fetchone()
+        for i, (label_text, column_name) in enumerate(self.fields):
+            # Left Frame: Labels
+            label = tk.Label(left_frame, text=label_text, font=("Arial", 10), bg="white", anchor="w")
+            label.place(x=10, y=i * 30)
 
-        if row:
-            self.loc_name.set(row[1])
-            self.loc_add1.set(row[2])
-            self.loc_add2.set(row[3])
-            self.loc_cty.set(row[4])
-            self.loc_phone.set(row[5])
-            self.loc_email.set(row[6])
-            self.loc_provid.set(row[7])
-            self.loc_zipc.set(row[8])
-        cursor.close()
+            # Right Frame: Entry Fields
+            entry_var = tk.StringVar(value=self.tcmp_loc_data.get(column_name, ""))
+            entry = tk.Entry(right_frame, textvariable=entry_var)
+            entry.place(x=10, y=i * 30, width=200)
+            self.input_vars[column_name] = entry_var
 
-    def edit_entry(self):
-        # Make all fields editable
-        self.enable_fields()
+        # Bottom Frame with Buttons
+        bottom_frame = tk.Frame(self.root, bg="white")
+        bottom_frame.place(x=0, y=400, width=800, height=100)
 
-    def save_entry(self):
-        # Save the current data into the database
-        cursor = self.conn.cursor()
-        cursor.execute("""
+        self.update_button = tk.Button(bottom_frame, text="Update",font=("Segoe UI", 12, "bold"), bg="blue", fg="white",
+                                     activebackground="blue", activeforeground="white", command=self.update_data,
+                                     height=2, width=15)
+        self.update_button.place(relx=0.4, y=20, width=80, height=30)
+
+        self.exit_button = tk.Button(bottom_frame, text="Exit", font=("Segoe UI", 12, "bold"), bg="#D83B01", fg="white",
+                                     activebackground="#A52A2A", activeforeground="white", command=self.root.quit,
+                                     height=2, width=15)
+        self.exit_button.place(relx=0.55, y=20, width=80, height=30)
+
+        # Enable the update button when any data is changed
+        for var in self.input_vars.values():
+            var.trace("w", self.enable_update)
+
+    def retrieve_tcmp_loc_data(self):
+        """Retrieve data from the tcmp_loc table."""
+        query = "SELECT * FROM tcmp_loc LIMIT 1"  # Adjust query as needed
+        self.db_cursor.execute(query)
+        self.tcmp_loc_data = self.db_cursor.fetchone()
+
+    def enable_update(self, *args):
+        self.update_button["state"] = "normal"
+
+    def update_data(self):
+        # Prepare data to update
+        update_data = {col: var.get() for col, var in self.input_vars.items()}
+        query = """
             UPDATE tcmp_loc 
-            SET cLocName = %s, cLoc_Add1 = %s, cLoc_Add2 = %s, cLoc_City = %s, cLocPhone = %s, cLoc_Email = %s, cLoc_Province = %s
+            SET cLoc_Name = %s, cLoc_Add1 = %s, cLoc_Add2 = %s, cLoc_City = %s, cLoc_zip = %s, cLoc_Porv = %s, 
+                cLoc_Country = %s, cLoc_Phone = %s, cLoc_Email = %s
             WHERE cLoc_ID = %s
-        """, (self.loc_name.get(), self.loc_add1.get(), self.loc_add2.get(),
-              self.loc_cty.get(), self.loc_phone.get(), self.loc_email.get(),
-              self.loc_provid.get(), self.loc_id.get()))
-        self.conn.commit()
-        cursor.close()
-        messagebox.showinfo("Success", "Record updated successfully!")
+        """
+        values = (
+            update_data["cLoc_Name"],
+            update_data["cLoc_Add1"],
+            update_data["cLoc_Add2"],
+            update_data["cLoc_City"],
+            update_data["cLoc_zip"],
+            update_data["cLoc_Porv"],
+            update_data["cLoc_Country"],
+            update_data["cLoc_Phone"],
+            update_data["cLoc_Email"],
+            update_data["cLoc_ID"]
+        )
 
-    def enable_fields(self):
-        # Enable all input fields for editing
-        for widget in [self.loc_name, self.loc_add1, self.loc_add2, self.loc_cty,
-                       self.loc_phone, self.loc_email, self.loc_provid]:
-            widget.config(state=tk.NORMAL)
-
-    def create_frames(self):
-        #self.mFrameFlr = self.frm_factory.create_frame(self.root, 200, 750, "brown", "#EEEEEE",
-        #                                         "BLACK", 2, 10)
-        #self.mFrameFlr.pack(side=tk.TOP, fill=tk.X)
-
-        self.mFrmMnu = self.frm_factory.create_frame(self.root, 150, 700, "#3D8ACC", "#EEEEEE",
-                                                     "BLACK", 2, 50)
-        self.mFrmMnu.place(x=9, y=80)
-
-        self.mFrmMgr = self.frm_factory.create_frame(self.root, 500, 500, "brown", "#EEEEEE",
-                                                     "BLACK", 2, 30)
-        self.mFrmMgr.place(x=220, y=170)
+        try:
+            self.db_cursor.execute(query, values)
+            self.db_connection.commit()
+            messagebox.showinfo("Success", "Data updated successfully!")
+            self.update_button["state"] = "disabled"
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
 
 
 if __name__ == "__main__":
-    root = ctk.CTk()
-    app = FloorManagerApp(root)
+    root = tk.Tk()
+    app = CompanyProfileApp(root)
     root.mainloop()
