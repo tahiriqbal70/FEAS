@@ -1,4 +1,4 @@
-# FEAS-1
+# FEAS
 
 **Fire Evacuation Automation System (FEAS)** for warehouses, developed in Python using Tkinter for the GUI, MySQL for data management, and advanced voice and data interaction capabilities.
 
@@ -30,8 +30,10 @@ FEAS is a Python-based application designed to automate the fire evacuation proc
 
 ## Installation
 
-To install FEAS-1, ensure that you have Python 3.12 or higher and MySQL installed.
+To install FEAS, ensure that you have Python 3.12 or higher and MySQL installed.
 
+- **Main Application  FEAS.py**
+- **UserName = admin / Password = MeOnly@007** 
 1. Clone the repository or download it to `D:\feas`:
    ```bash
    git clone https://github.com/tahiriqbal70/FEAS.git
