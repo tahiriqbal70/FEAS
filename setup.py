@@ -1,22 +1,24 @@
-import setuptools
+from setuptools import setup, find_packages
 
-
+# Read the README file
 with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
 
-setuptools.setup(
-    name="FEAS",
-    version="0.0.1",
-    author="TAHIR IQBAL",
-    author_email="tahiriqbal70@gmail.com",
-    description="Fire Evacuation Automation System",
-    long_description="Fire Evacuation Automation System is a software that helps to automate the fire evacuation process. It can be used to monitor the fire situation, detect and locate fire extinguishers, and control the fire evacuation process.",
+# Setup configuration
+setup(
+    name='FEAS',
+    version='0.0.2',
+    author='Tahir Iqbal',
+    author_email='tahiriqbal70@gmail.com',
+    description='Fire Evacuation Automation System',
+    long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/tahiriqbal70/FEAS",
-    packages=setuptools.find_packages(),
+    url='https://github.com/username/FEAS',  # Add your actual GitHub URL
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
+        "Operating System :: Microsoft :: Windows :: Windows 10"
     ],
+    packages=find_packages(),
+    install_requires=['']  # Add dependencies here if any, e.g., ['requests', 'numpy']
 )

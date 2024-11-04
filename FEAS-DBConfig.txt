@@ -1,0 +1,4 @@
+host     = 'locoalhost'
+user     = 'root'
+password = 'MeOnly@007'
+database = 'feas'

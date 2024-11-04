@@ -1,40 +1,19 @@
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "FEAS"
-version = "0.0.1"  # Update version as needed
-description = "Fire Evacuation Automation System for warehouses"
-readme = "README.md"  # Ensure a README.md is in your project root
-license = { text = "MIT" }
+version = "0.0.2"
 authors = [
-    { name = "Tahir Iqbal", email = "tahiriqbal70@gmail.com" }
+  { name="Tahir Iqbal", email="tahiriqbal70@gmail.com" },
 ]
-keywords = ["fire evacuation", "automation", "Tkinter", "Python", "safety"]
+description = "Fire Evacuation Automation System"
+readme = "README.md"
+requires-python = ">=3.10"
 classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "Topic :: Software Development :: Libraries :: Application Frameworks",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.12",
+   "Programming Language :: Python :: 3",
+   "License :: OSI Approved :: MIT License",
+   "Operating System :: Microsoft :: Windows :: Windows 10"
 ]
+license = { text = "MIT License" }
 
 [project.urls]
-"Source" = "https://github.com/tahiriqbal70/FEAS
-"Documentation" = "https://github.com/tahiriqbal70/FEAS/wiki"
-
-[project.dependencies]
-mysql-connector-python = "^8.0"  # MySQL connector
-tkinter = "*"  # Tkinter comes bundled with Python, specify here if needed for clarity
-# Add other dependencies here, e.g., `some-package = "^1.2.3"`
-
-[tool.setuptools]
-package-dir = {"" = "src"}
-packages = ["feas"]
-
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools.scripts]
-feas = "feas.feas:main"  # Ensure feas.py has a main() entry point for execution
+Homepage = "https://github.com/tahiriqbal70/FEAS"
+Issues = "https://github.com/tahiriqbal70/FEAS/issues"
