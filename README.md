@@ -33,7 +33,8 @@ FEAS is a Python-based application designed to automate the fire evacuation proc
 To install FEAS, ensure that you have Python 3.12 or higher and MySQL installed.
 
 - **Main Application  FEAS.py**
-- **UserName = admin / Password = MeOnly@007** 
+- **UserName = admin / Password = password123** 
+- **Import MySQL database file FEAS_Database.sql before running application with host='localhost', user='root', password='MeOnly@007', database='feas'**
 1. Clone the repository or download it to `D:\feas`:
    ```bash
    git clone https://github.com/tahiriqbal70/FEAS.git
