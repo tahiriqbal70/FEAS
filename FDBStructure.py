@@ -1,4 +1,7 @@
 import mysql.connector
+import tkinter as tk
+from tkinter import messagebox
+
 
 # Database connection details
 hostname = 'localhost'
@@ -62,7 +65,7 @@ try:
     with open('database_documentation.md', 'w') as f:
         f.write(documentation)
 
-    print("Database documentation generated successfully!")
+    messagebox.showinfo("FEAS - Acknowledgement", "Database documentation generated successfully and saved as 'database_documentation.md'!")
 
 except mysql.connector.Error as err:
     print(f"Error: {err}")
