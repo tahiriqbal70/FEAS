@@ -92,7 +92,7 @@ class MainMenuWindow(tk.Tk):
 
     def run_program1(self, program_name):
         if program_name == "Company Setup":
-            subprocess.run(["python", "FCompany.py"])
+            subprocess.run(["python", "FCmpInfo.py"])
         elif program_name == "Fire Exits":
             subprocess.run(["python", "FListExits.py"])
         elif program_name == "Admin Users":
